@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!-- 
+  Build the ipca ...
+-->
+<project name="testbuild"
+   default="testMain"
+   basedir=".">
+
+  <!-- 
+   Register the sys.* properties; most specifically, sys.env.* for all environment vars 
+  -->
+  <sysinfo/>
+
+  <property name="testFile" value="AssemblyTestFile.txt" />
+  <property name="tempFile" value="tmpAssemblyTestFile.txt" />
+
+  <target name="testMain" >
+
+    <echo message="Testing start"/>
+    
+    <delete file="${tempFile}" failonerror="false" />
+    <copy tofile="${tempFile}" file="${testFile}" />
+    
+    <loadtasks assembly="bin\debug\DE.Nant.Extensions.dll"/>
+
+    <setVersionAssembly
+         file="${tempFile}"
+         buildNumber="3.333.3.3000"
+    />
+
+    <echo message="-------" />
+    <echo message="Done !" />
+  </target>
+
+</project>
